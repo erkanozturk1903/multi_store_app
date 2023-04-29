@@ -30,14 +30,14 @@ class ElectronicsCategory extends StatelessWidget {
                       crossAxisSpacing: 15,
                       crossAxisCount: 3,
                       children: List.generate(
-                        electronics.length,
+                        electronics.length - 1,
                         (index) {
                           return SubCategModel(
                             mainCategName: 'Elektronik',
-                            subCategName: electronics[index],
+                            subCategName: electronics[index + 1],
                             assetName:
                                 'images/electronics/electronics$index.jpg',
-                            subCategLabel: electronics[index],
+                            subCategLabel: electronics[index + 1],
                           );
                         },
                       ),

@@ -92,10 +92,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
               .ref('cust-images/$email.jpg');
 
           await ref.putFile(File(_imageFile!.path));
+          _uid = FirebaseAuth.instance.currentUser!.uid;
 
           profileImage = await ref.getDownloadURL();
-
-          _uid = FirebaseAuth.instance.currentUser!.uid;
 
           await customers.doc(_uid).set({
             'name': name,
