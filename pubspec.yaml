@@ -42,6 +42,8 @@ dependencies:
   cloud_firestore: ^4.5.2
   firebase_storage: ^11.1.1
   uuid: ^3.0.7
+  staggered_grid_view_flutter: ^0.0.4
+  flutter_swiper_null_safety: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +100,9 @@ flutter:
     - family: Acme
       fonts:
         - asset: fonts/Acme-Regular.ttf
+    - family: AkayaTelivigala
+      fonts:
+        - asset: fonts/AkayaTelivigala-Regular.ttf    
   # fonts:
   #   - family: Schyler
   #     fonts:

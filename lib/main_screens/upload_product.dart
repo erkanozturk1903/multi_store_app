@@ -29,7 +29,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   late String proName;
   late String proDesc;
   late String proId;
-  String mainCategValue = 'Erkek';
+  String mainCategValue = 'select category';
   String subCategValue = 'Gömlek';
   List<String> subCategList = [];
   bool processing = false;
