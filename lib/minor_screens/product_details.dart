@@ -1,6 +1,9 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:multi_store_app/main_screens/visit_store.dart';
 import 'package:multi_store_app/minor_screens/full_screen_view.dart';
 import 'package:multi_store_app/models/product_model.dart';
 import 'package:multi_store_app/widgets/yellow_butto.dart';
@@ -228,7 +231,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VisitStore(
+                              suppId: widget.proList['sid'],
+                            ),
+                          ),
+                        );
+                      },
                       icon: const Icon(Icons.store),
                     ),
                     const SizedBox(

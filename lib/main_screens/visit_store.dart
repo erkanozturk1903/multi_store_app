@@ -1,8 +1,13 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/models/product_model.dart';
+import 'package:multi_store_app/widgets/appbar_widgets.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VisitStore extends StatefulWidget {
   final String suppId;
@@ -16,6 +21,7 @@ class VisitStore extends StatefulWidget {
 }
 
 class _VisitStoreState extends State<VisitStore> {
+  var following = false;
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
@@ -56,6 +62,7 @@ class _VisitStoreState extends State<VisitStore> {
                 'images/inapp/coverimage.jpg',
                 fit: BoxFit.cover,
               ),
+              leading: const YellowBackButton(),
               title: Row(
                 children: [
                   Container(
@@ -97,24 +104,52 @@ class _VisitStoreState extends State<VisitStore> {
                             ),
                           ],
                         ),
-                        Container(
-                          height: 35,
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: Colors.yellow,
-                              border: Border.all(
-                                width: 3,
-                                color: Colors.black,
-                              )),
-                          child: const Center(
-                            child: Text(
-                              ' TAKİP ET',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
-                          ),
-                        )
+                        data['sid'] == FirebaseAuth.instance.currentUser!.uid
+                            ? Container(
+                                height: 35,
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.yellow,
+                                    border: Border.all(
+                                      width: 3,
+                                      color: Colors.black,
+                                    )),
+                                child: MaterialButton(
+                                    onPressed: () {},
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: const [
+                                        Text('Düzenle'),
+                                        Icon(
+                                          Icons.edit,
+                                          color: Colors.black,
+                                        )
+                                      ],
+                                    )),
+                              )
+                            : Container(
+                                height: 35,
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.yellow,
+                                    border: Border.all(
+                                      width: 3,
+                                      color: Colors.black,
+                                    )),
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      following = !following;
+                                    });
+                                  },
+                                  child: following == true
+                                      ? const Text('Takip Ediliyor')
+                                      : const Text('Takip Et'),
+                                ),
+                              ),
                       ],
                     ),
                   )
@@ -167,6 +202,15 @@ class _VisitStoreState extends State<VisitStore> {
                   ),
                 );
               },
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: Colors.green,
+              child: const Icon(
+                FontAwesomeIcons.whatsapp,
+                color: Colors.white,
+                size: 40,
+              ),
             ),
           );
         }
