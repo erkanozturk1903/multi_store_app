@@ -3,12 +3,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:multi_store_app/main_screens/cart.dart';
 import 'package:multi_store_app/main_screens/visit_store.dart';
 import 'package:multi_store_app/minor_screens/full_screen_view.dart';
 import 'package:multi_store_app/models/product_model.dart';
+import 'package:multi_store_app/providers/cart_provider.dart';
+import 'package:multi_store_app/widgets/appbar_widgets.dart';
 import 'package:multi_store_app/widgets/yellow_butto.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final dynamic proList;
@@ -247,13 +251,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       width: 20,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartScreen(
+                              back: AppBarBackButton(),
+                            ),
+                          ),
+                        );
+                      },
                       icon: const Icon(Icons.shopping_cart),
                     ),
                   ],
                 ),
                 YellowButton(
-                    label: 'Sepete Ekle', onPressed: () {}, width: 0.55)
+                  label: 'Sepete Ekle',
+                  onPressed: () {
+                    context.read<Cart>().addItem(
+                          widget.proList['proname'],
+                          widget.proList['price'],
+                          1,
+                          widget.proList['instock'],
+                          widget.proList['proimages'],
+                          widget.proList['proid'],
+                          widget.proList['sid'],
+                        );
+                  },
+                  width: 0.55,
+                )
               ],
             ),
           ),

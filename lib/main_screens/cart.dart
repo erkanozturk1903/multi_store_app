@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:multi_store_app/providers/cart_provider.dart';
 import 'package:multi_store_app/widgets/appbar_widgets.dart';
 import 'package:multi_store_app/widgets/yellow_butto.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
   final Widget? back;
@@ -19,6 +22,7 @@ class _CartScreenState extends State<CartScreen> {
     return Material(
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.grey.shade200,
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
@@ -36,7 +40,125 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
-          body: Center(
+          body: Consumer<Cart>(
+            builder: (context, cart, child) {
+              return ListView.builder(
+                itemCount: cart.count,
+                itemBuilder: (context, index) {
+                  final product = cart.getItems[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Card(
+                      child: SizedBox(
+                        height: 100,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 100,
+                              width: 120,
+                              child: Image.network(
+                                product.imagesUrl.first,
+                              ),
+                            ),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      product.name,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey.shade700,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          product.price.toStringAsFixed(2),
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade200,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Row(
+                                              children: [
+                                                product.qty == 1
+                                                    ? IconButton(
+                                                        onPressed: () {},
+                                                        icon: const Icon(
+                                                          Icons.delete_forever,
+                                                          size: 18,
+                                                        ),
+                                                      )
+                                                    : IconButton(
+                                                        onPressed: () {
+                                                          cart.reduceByOne(
+                                                              product);
+                                                        },
+                                                        icon: const Icon(
+                                                          FontAwesomeIcons
+                                                              .minus,
+                                                          size: 18,
+                                                        ),
+                                                      ),
+                                                Text(
+                                                  product.qty.toString(),
+                                                  style: product.qty ==
+                                                          product.qtty
+                                                      ? const TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.red,
+                                                          fontFamily: 'Acme')
+                                                      : const TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily: 'Acme'),
+                                                ),
+                                                IconButton(
+                                                  onPressed: product.qty ==
+                                                          product.qtty
+                                                      ? null
+                                                      : () {
+                                                          cart.increment(
+                                                              product);
+                                                        },
+                                                  icon: const Icon(
+                                                    FontAwesomeIcons.plus,
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                              ],
+                                            )),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+
+          /* Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -75,7 +197,7 @@ class _CartScreenState extends State<CartScreen> {
                 )
               ],
             ),
-          ),
+          ), */
           bottomSheet: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
