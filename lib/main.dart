@@ -9,6 +9,7 @@ import 'package:multi_store_app/main_screens/customer_home.dart';
 import 'package:multi_store_app/main_screens/supplier_home.dart';
 import 'package:multi_store_app/main_screens/welcome_screen.dart';
 import 'package:multi_store_app/providers/cart_provider.dart';
+import 'package:multi_store_app/providers/wish_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -21,6 +22,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
           create: (_) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Wish(),
         ),
       ],
       child: const MyApp(),
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
-      initialRoute: '/supplier_screen',
+      initialRoute: '/welcome_screen',
       routes: {
         '/welcome_screen': (context) => const WelcomeScreen(),
         '/customer_screen': (context) => const CustomerHomeScreen(),
