@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'package:flutter/material.dart';
+import 'package:multi_store_app/models/wish_model.dart';
 import 'package:multi_store_app/providers/wish_provider.dart';
+import 'package:multi_store_app/widgets/alert_dialog.dart';
 import 'package:multi_store_app/widgets/appbar_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -27,21 +30,21 @@ class _WishListScreenState extends State<WishListScreen> {
             title: const AppBarTitle(
               title: 'İstek Listesi',
             ),
-            /* actions: [
-              context.watch<Cart>().getItems.isEmpty
+            actions: [
+              context.watch<Wish>().getWishItems.isEmpty
                   ? const SizedBox()
                   : IconButton(
                       onPressed: () {
                         MyAlertDialog.showMyDialog(
                           context: context,
-                          title: 'Sepeti Temizle',
+                          title: 'İstek Listesini Temizle',
                           content:
-                              ' Sepeti temizlemek istediğinizden emin misiniz?',
+                              ' İstek Listesini temizlemek istediğinizden emin misiniz?',
                           tabNo: () {
                             Navigator.pop(context);
                           },
                           tabYes: () {
-                            context.read<Cart>().clearCart();
+                            context.read<Wish>().clearWishList();
                             Navigator.pop(context);
                           },
                         );
@@ -50,8 +53,8 @@ class _WishListScreenState extends State<WishListScreen> {
                         Icons.delete_forever,
                         color: Colors.black,
                       ),
-                    ), 
-            ],*/
+                    ),
+            ],
           ),
           body: context.watch<Wish>().getWishItems.isNotEmpty
               ? const WishItems()
@@ -101,79 +104,7 @@ class WishItems extends StatelessWidget {
           itemCount: wish.count,
           itemBuilder: (context, index) {
             final product = wish.getWishItems[index];
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Card(
-                child: SizedBox(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        width: 120,
-                        child: Image.network(
-                          product.imagesUrl.first,
-                        ),
-                      ),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                product.name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade700,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    product.price.toStringAsFixed(2),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          context
-                                              .read<Wish>()
-                                              .removeItem(product);
-                                        },
-                                        icon: const Icon(Icons.delete_forever),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon:
-                                            const Icon(Icons.add_shopping_cart),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return WishlistModel(product: product);
           },
         );
       },

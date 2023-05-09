@@ -1,5 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:multi_store_app/models/cart_model.dart';
 import 'package:multi_store_app/providers/cart_provider.dart';
 import 'package:multi_store_app/widgets/alert_dialog.dart';
 import 'package:multi_store_app/widgets/appbar_widgets.dart';
@@ -160,109 +162,9 @@ class CartItems extends StatelessWidget {
           itemCount: cart.count,
           itemBuilder: (context, index) {
             final product = cart.getItems[index];
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Card(
-                child: SizedBox(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        width: 120,
-                        child: Image.network(
-                          product.imagesUrl.first,
-                        ),
-                      ),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                product.name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade700,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    product.price.toStringAsFixed(2),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade200,
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      child: Row(
-                                        children: [
-                                          product.qty == 1
-                                              ? IconButton(
-                                                  onPressed: () {
-                                                    cart.removeItem(product);
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.delete_forever,
-                                                    size: 18,
-                                                  ),
-                                                )
-                                              : IconButton(
-                                                  onPressed: () {
-                                                    cart.reduceByOne(product);
-                                                  },
-                                                  icon: const Icon(
-                                                    FontAwesomeIcons.minus,
-                                                    size: 18,
-                                                  ),
-                                                ),
-                                          Text(
-                                            product.qty.toString(),
-                                            style: product.qty == product.qtty
-                                                ? const TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.red,
-                                                    fontFamily: 'Acme')
-                                                : const TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: 'Acme'),
-                                          ),
-                                          IconButton(
-                                            onPressed:
-                                                product.qty == product.qtty
-                                                    ? null
-                                                    : () {
-                                                        cart.increment(product);
-                                                      },
-                                            icon: const Icon(
-                                              FontAwesomeIcons.plus,
-                                              size: 18,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+            return CartModel(
+              product: product,
+              cart: context.read<Cart>(),
             );
           },
         );
