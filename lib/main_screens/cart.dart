@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/minor_screens/place_order.dart';
 import 'package:multi_store_app/models/cart_model.dart';
 import 'package:multi_store_app/providers/cart_provider.dart';
 import 'package:multi_store_app/widgets/alert_dialog.dart';
@@ -22,6 +23,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    double total = context.watch<Cart>().totalPrice;
     return Material(
       child: SafeArea(
         child: Scaffold(
@@ -76,7 +78,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      context.watch<Cart>().totalPrice.toStringAsFixed(2),
+                      total.toStringAsFixed(2),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -88,7 +90,16 @@ class _CartScreenState extends State<CartScreen> {
                 YellowButton(
                   label: 'TAMAMLA',
                   width: 0.45,
-                  onPressed: () {},
+                  onPressed: total == 0.0
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PlaceOrderScreen(),
+                            ),
+                          );
+                        },
                 ),
               ],
             ),

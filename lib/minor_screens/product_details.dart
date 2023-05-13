@@ -43,7 +43,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     var existingItemCart = context.read<Cart>().getItems.firstWhereOrNull(
-          (product) => product.documentId == widget.proList['proid'],
+          (element) => element.documentId == widget.proList['proid'],
         );
     return Material(
       child: SafeArea(
@@ -299,33 +299,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         width: 20,
                       ),
                       IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CartScreen(
-                                  back: AppBarBackButton(),
-                                ),
-                              ),
-                            );
-                          },
-                          icon: badges.Badge(
-                            showBadge: context.read<Cart>().getItems.isEmpty
-                                ? false
-                                : true,
-                            badgeStyle: const badges.BadgeStyle(
-                              badgeColor: Colors.yellow,
-                              padding: EdgeInsets.all(2),
-                            ),
-                            badgeContent: Text(
-                              context.watch<Cart>().getItems.length.toString(),
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CartScreen(
+                                back: AppBarBackButton(),
                               ),
                             ),
-                            child: const Icon(Icons.shopping_cart),
-                          )),
+                          );
+                        },
+                        icon: badges.Badge(
+                          showBadge: context.read<Cart>().getItems.isEmpty
+                              ? false
+                              : true,
+                          badgeStyle: const badges.BadgeStyle(
+                            badgeColor: Colors.yellow,
+                            padding: EdgeInsets.all(2),
+                          ),
+                          badgeContent: Text(
+                            context.watch<Cart>().getItems.length.toString(),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Icon(Icons.shopping_cart),
+                        ),
+                      ),
                     ],
                   ),
                   YellowButton(
