@@ -200,14 +200,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ],
                   ),
-                  Text(
-                    (widget.proList['instock'].toString()) +
-                        (' Adet stokta mevcut'),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
+                  widget.proList['instock'] == 0
+                      ? const Text(
+                          'Bu ürün stokta yok',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.blueGrey,
+                          ),
+                        )
+                      : Text(
+                          (widget.proList['instock'].toString()) +
+                              (' Adet stokta mevcut'),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
                   const ProDetailHeader(
                     label: '  Ürün Açıklaması  ',
                   ),
@@ -334,18 +342,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ? 'Sepete Eklendi'
                         : 'Sepete Ekle',
                     onPressed: () {
-                      existingItemCart != null
-                          ? MyMessageHandler.showSnackBar(
-                              _scaffoldKey, 'Bu ürün zaten sepete eklenmiş')
-                          : context.read<Cart>().addItem(
-                                widget.proList['proname'],
-                                widget.proList['price'],
-                                1,
-                                widget.proList['instock'],
-                                widget.proList['proimages'],
-                                widget.proList['proid'],
-                                widget.proList['sid'],
-                              );
+                      if (widget.proList['instock'] == 0) {
+                        MyMessageHandler.showSnackBar(
+                            _scaffoldKey, 'Bu ürün stokta kalmadı.');
+                      } else if (existingItemCart != null) {
+                        MyMessageHandler.showSnackBar(
+                            _scaffoldKey, 'Bu ürün zaten sepete eklenmiş');
+                      } else {
+                        context.read<Cart>().addItem(
+                              widget.proList['proname'],
+                              widget.proList['price'],
+                              1,
+                              widget.proList['instock'],
+                              widget.proList['proimages'],
+                              widget.proList['proid'],
+                              widget.proList['sid'],
+                            );
+                      }
                     },
                     width: 0.55,
                   )

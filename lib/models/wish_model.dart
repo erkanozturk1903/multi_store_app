@@ -70,10 +70,11 @@ class WishlistModel extends StatelessWidget {
                                 width: 10,
                               ),
                               context.watch<Cart>().getItems.firstWhereOrNull(
-                                          (element) =>
-                                              element.documentId ==
-                                              product.documentId) !=
-                                      null
+                                              (element) =>
+                                                  element.documentId ==
+                                                  product.documentId) !=
+                                          null ||
+                                      product.qtty == 0
                                   ? const SizedBox()
                                   : IconButton(
                                       onPressed: () {

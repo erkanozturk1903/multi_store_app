@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +9,7 @@ import 'package:multi_store_app/widgets/appbar_widgets.dart';
 import 'package:multi_store_app/widgets/yellow_butto.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -22,6 +23,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
   late String orderId;
   CollectionReference customers =
       FirebaseFirestore.instance.collection('customers');
+
+  showProgress() {
+    ProgressDialog progress = ProgressDialog(context: context);
+    progress.show(
+      max: 100,
+      msg: 'Lütfen Bekleyin...',
+      progressBgColor: Colors.red,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,6 +263,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         label:
                                             'Onayla ${totalPaid.toStringAsFixed(2)} TL',
                                         onPressed: () async {
+                                          showProgress();
                                           for (var item in context
                                               .read<Cart>()
                                               .getItems) {
@@ -271,18 +282,43 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               'sid': item.suppId,
                                               'proid': item.documentId,
                                               'orderid': orderId,
+                                              'ordername': item.name,
                                               'orderimage':
                                                   item.imagesUrl.first,
                                               'orderqty': item.qty,
                                               'orderprice':
                                                   item.qty * item.price,
                                               'deliverystatus': 'Hazırlanıyor',
-                                              'deliveydate': '',
+                                              'deliverydate': '',
                                               'orderdate': DateTime.now(),
-                                              'paymenystatus': 'Kapıda Ödeme',
+                                              'paymentstatus': 'Kapıda Ödeme',
                                               'orderreview': false,
+                                            }).whenComplete(() async {
+                                              await FirebaseFirestore.instance
+                                                  .runTransaction(
+                                                      (transaction) async {
+                                                DocumentReference
+                                                    documentReference =
+                                                    FirebaseFirestore.instance
+                                                        .collection('products')
+                                                        .doc(item.documentId);
+                                                DocumentSnapshot snapshot2 =
+                                                    await transaction
+                                                        .get(documentReference);
+                                                transaction.update(
+                                                    documentReference, {
+                                                  'instock':
+                                                      snapshot2['instock'] -
+                                                          item.qty
+                                                });
+                                              });
                                             });
                                           }
+                                          context.read<Cart>().clearCart();
+                                          Navigator.popUntil(
+                                              context,
+                                              (ModalRoute.withName(
+                                                  '/customer_screen')));
                                         },
                                         width: 0.9,
                                       )
