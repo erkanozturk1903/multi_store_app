@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_store_app/main_screens/dashboard.dart';
 import 'package:multi_store_app/widgets/appbar_widgets.dart';
 
 class SupplierBalance extends StatelessWidget {

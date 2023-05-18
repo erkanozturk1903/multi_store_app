@@ -42,6 +42,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var onSale = widget.proList['discount'];
     var existingItemCart = context.read<Cart>().getItems.firstWhereOrNull(
           (element) => element.documentId == widget.proList['proid'],
         );
@@ -142,17 +143,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: [
                           Text(
                             widget.proList['price'].toStringAsFixed(2),
-                            style: const TextStyle(
-                                color: Colors.red,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
+                            style: onSale != 0
+                                ? const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                    decoration: TextDecoration.lineThrough,
+                                    fontWeight: FontWeight.w600,
+                                  )
+                                : const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                           ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          onSale != 0
+                              ? Text(
+                                  ((1 - (onSale / 100)) *
+                                          widget.proList['price'])
+                                      .toStringAsFixed(2),
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              : const Text(''),
                           const Text(
                             ' TL',
                             style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
+                              color: Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -172,7 +197,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   )
                               : context.read<Wish>().addWishItem(
                                     widget.proList['proname'],
-                                    widget.proList['price'],
+                                    onSale != 0
+                                        ? ((1 - (onSale / 100)) *
+                                            widget.proList['price'])
+                                        : widget.proList['price'],
                                     1,
                                     widget.proList['instock'],
                                     widget.proList['proimages'],
@@ -351,7 +379,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       } else {
                         context.read<Cart>().addItem(
                               widget.proList['proname'],
-                              widget.proList['price'],
+                              onSale != 0
+                                  ? ((1 - (onSale / 100)) *
+                                      widget.proList['price'])
+                                  : widget.proList['price'],
                               1,
                               widget.proList['instock'],
                               widget.proList['proimages'],

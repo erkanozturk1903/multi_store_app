@@ -9,8 +9,6 @@ import 'package:multi_store_app/main_screens/home.dart';
 import 'package:multi_store_app/main_screens/stores.dart';
 import 'package:multi_store_app/main_screens/upload_product.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:multi_store_app/providers/cart_provider.dart';
-import 'package:provider/provider.dart';
 
 class SupplierHomeScreen extends StatefulWidget {
   const SupplierHomeScreen({super.key});

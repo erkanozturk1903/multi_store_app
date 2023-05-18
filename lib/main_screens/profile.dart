@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, unused_label, sort_child_properties_last, unused_local_variable
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -294,28 +294,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                         const YellowDivider(),
                                         RepeatedListTile(
-                                          title: 'Çıkış Yap',
-                                          icon: Icons.logout,
-                                          onPressed: () async {
-                                            MyAlertDialog.showMyDialog(
-                                                context: context,
-                                                title: 'Çıkış Yap',
-                                                content:
-                                                    'Çıkmak istediğinizden emin misin?',
-                                                tabNo: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                tabYes: () async {
-                                                  await FirebaseAuth.instance
-                                                      .signOut();
-                                                  Navigator.pop(context);
-                                                  Navigator
-                                                      .pushReplacementNamed(
-                                                          context,
-                                                          '/welcome_screen');
-                                                });
-                                          },
-                                        ),
+                                            title: 'Çıkış Yap',
+                                            icon: Icons.logout,
+                                            onPressed: () async {
+                                              MyAlertDialog.showMyDialog(
+                                                  context: context,
+                                                  title: 'Çıkış Yap',
+                                                  content:
+                                                      'Çıkmak istediğinizden emin misin?',
+                                                  tabNo: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  tabYes: () async {
+                                                    await FirebaseAuth.instance
+                                                        .signOut();
+                                                    await Future.delayed(
+                                                            const Duration(
+                                                                microseconds:
+                                                                    100))
+                                                        .whenComplete(() {
+                                                      Navigator.pop(context);
+                                                      Navigator
+                                                          .pushReplacementNamed(
+                                                              context,
+                                                              '/welcome_screen');
+                                                    });
+                                                  });
+                                            })
                                       ],
                                     ),
                                   ),
