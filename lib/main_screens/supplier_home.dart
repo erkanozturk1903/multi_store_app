@@ -33,7 +33,7 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
       stream: FirebaseFirestore.instance
           .collection('orders')
           .where('sid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-          .where('deliverystatus', isEqualTo: 'Hazırlanıyor')
+          .where('deliverystatus', isEqualTo: 'preparing')
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

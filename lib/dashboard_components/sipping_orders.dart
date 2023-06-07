@@ -12,7 +12,7 @@ class Shipping extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection('orders')
           .where('sid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-          .where('deliverystatus', isEqualTo: 'Kargoda')
+          .where('deliverystatus', isEqualTo: 'shipping')
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {

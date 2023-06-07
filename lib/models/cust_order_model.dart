@@ -129,21 +129,22 @@ class CustomerOrderModel extends StatelessWidget {
                         ),
                       ],
                     ),
-                    order['deliverystatus'] == 'Kargoda'
+                    order['deliverystatus'] == 'shipping'
                         ? Text(
                             ('Tahmini Teslim Tarihi :') +
                                 (DateFormat('yyyy-MM-dd')
                                         .format(order['deliverydate'].toDate()))
                                     .toString(),
                             style: const TextStyle(
-                              fontSize: 15,
-                            ),
+                                fontSize: 15, color: Colors.blue),
                           )
                         : const Text(''),
                     order['deliverystatus'] == 'delivered' &&
-                            order['orderrewiew'] == false
+                            order['orderreview'] == false
                         ? TextButton(
-                            onPressed: () {}, child: const Text('İnceleme Yaz'))
+                            onPressed: () {},
+                            child: const Text('İnceleme Yaz'),
+                          )
                         : const Text(''),
                     order['deliverystatus'] == 'delivered' &&
                             order['orderrewiew'] == true
@@ -154,7 +155,7 @@ class CustomerOrderModel extends StatelessWidget {
                                 color: Colors.blue,
                               ),
                               Text(
-                                'Sepeti Gözden Geçir',
+                                'İnceleme Yazıldı',
                                 style: TextStyle(
                                   fontStyle: FontStyle.italic,
                                   color: Colors.blue,

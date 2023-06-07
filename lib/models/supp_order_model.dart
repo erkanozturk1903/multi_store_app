@@ -146,7 +146,7 @@ class SupplierOrderModel extends StatelessWidget {
                         ),
                       ],
                     ),
-                    order['deliverystatus'] == 'Teslim edildi'
+                    order['deliverystatus'] == 'delivered'
                         ? const Text('Bu sipariş zaten teslim edildi')
                         : Row(
                             children: [
@@ -158,7 +158,7 @@ class SupplierOrderModel extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {},
-                                child: order['deliverystatus'] == 'Hazırlanıyor'
+                                child: order['deliverystatus'] == 'preparing'
                                     ? TextButton(
                                         onPressed: () {
                                           DatePicker.showDatePicker(
@@ -172,7 +172,7 @@ class SupplierOrderModel extends StatelessWidget {
                                                   .collection('orders')
                                                   .doc(order['orderid'])
                                                   .update({
-                                                'deliverystatus': 'Kargoda',
+                                                'deliverystatus': 'shipping',
                                                 'deliverydate': date,
                                               });
                                             },
@@ -186,7 +186,7 @@ class SupplierOrderModel extends StatelessWidget {
                                               .collection('orders')
                                               .doc(order['orderid'])
                                               .update({
-                                            'deliverystatus': 'Teslim Edildi',
+                                            'deliverystatus': 'delivered',
                                           });
                                         },
                                         child: const Text('Teslim Edildi ?'),
