@@ -8,41 +8,19 @@ class AppBarBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
       icon: const Icon(
         Icons.arrow_back_ios_new,
         color: Colors.black,
       ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-  }
-}
-
-class YellowBackButton extends StatelessWidget {
-  const YellowBackButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(
-        Icons.arrow_back_ios_new,
-        color: Colors.yellow,
-      ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
     );
   }
 }
 
 class AppBarTitle extends StatelessWidget {
-  const AppBarTitle({
-    super.key,
-    required this.title,
-  });
+  const AppBarTitle({super.key, required this.title});
 
   final String title;
 
@@ -51,11 +29,10 @@ class AppBarTitle extends StatelessWidget {
     return Text(
       title,
       style: const TextStyle(
-        color: Colors.black,
-        fontFamily: 'Acme',
-        fontSize: 24,
-        letterSpacing: 1.5,
-      ),
+          color: Colors.black,
+          fontFamily: 'Acme',
+          fontSize: 24,
+          letterSpacing: 1.5),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/widgets/appbar_widgets.dart';
 
-class EditBusiness extends StatelessWidget {
-  const EditBusiness({super.key});
+class SupplierOrders extends StatelessWidget {
+  const SupplierOrders({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +10,7 @@ class EditBusiness extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const AppBarTitle(
-          title: 'EditBusines',
-        ),
+        title: const AppBarTitle(title: 'SupplierOrders'),
         leading: const AppBarBackButton(),
       ),
     );

@@ -10,9 +10,7 @@ class MyStore extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const AppBarTitle(
-          title: 'My Store',
-        ),
+        title: const AppBarTitle(title: 'Mağazam'),
         leading: const AppBarBackButton(),
       ),
     );

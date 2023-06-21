@@ -1,13 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:multi_store_app/galleries/acces_gallery.dart';
-import 'package:multi_store_app/galleries/bags_gallery.dart';
-import 'package:multi_store_app/galleries/beauty_gallery.dart';
-import 'package:multi_store_app/galleries/electronics_dallery.dart';
-import 'package:multi_store_app/galleries/homegarden_gallery.dart';
-import 'package:multi_store_app/galleries/kids_gallery.dart';
-import 'package:multi_store_app/galleries/men_gallery.dart';
-import 'package:multi_store_app/galleries/shoes_gallery.dart';
-import 'package:multi_store_app/galleries/women_gallery.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -65,7 +56,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: const TabBarView(
           children: [
-            MenGalleryScreen(),
+            Center(
+              child: Text('Erkek Ekran'),
+            ),
+            Center(
+              child: Text('Kadın Ekran'),
+            ),
+            Center(
+              child: Text('Ayakkabı Ekran'),
+            ),
+            Center(
+              child: Text('Çanta Ekran'),
+            ),
+            Center(
+              child: Text('Elektronik Ekran'),
+            ),
+            Center(
+              child: Text('Aksesuar Ekran'),
+            ),
+            Center(
+              child: Text('Ev&Bahçe Ekran'),
+            ),
+            Center(
+              child: Text('Çocuk Ekran'),
+            ),
+            Center(
+              child: Text('Makyaj Ekran'),
+            ),
+            /* MenGalleryScreen(),
             WomenGalleryScreen(),
             ShoesGalleryScreen(),
             BagsGalleryScreen(),
@@ -73,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             AccessoriesGalleryScreen(),
             HomeGardenGalleryScreen(),
             KidsGalleryScreen(),
-            BeautyGalleryScreen()
+            BeautyGalleryScreen() */
           ],
         ),
       ),

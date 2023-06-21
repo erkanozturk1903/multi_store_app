@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:multi_store_app/minor_screens/subcateg_products.dart';
 
 class SliderBar extends StatelessWidget {
-  final String mainCategName;
+  final String maincategName;
   const SliderBar({
-    required this.mainCategName,
     super.key,
+    required this.maincategName,
   });
 
   @override
@@ -14,7 +14,7 @@ class SliderBar extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.8,
       width: MediaQuery.of(context).size.width * 0.05,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40),
+        padding: const EdgeInsets.symmetric(vertical: 40.0),
         child: Container(
           decoration: BoxDecoration(
               color: Colors.brown.withOpacity(0.2),
@@ -24,19 +24,22 @@ class SliderBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                mainCategName == 'Makyaj'
+                maincategName == 'makyaj'
                     ? const Text('')
                     : const Text(
                         ' << ',
                         style: style,
                       ),
-                Text(mainCategName.toUpperCase(), style: style),
-                mainCategName == 'Erkek'
+                Text(
+                  maincategName.toUpperCase(),
+                  style: style,
+                ),
+                maincategName == 'erkek'
                     ? const Text('')
                     : const Text(
                         ' >> ',
                         style: style,
-                      ),
+                      )
               ],
             ),
           ),
@@ -53,18 +56,17 @@ const style = TextStyle(
   letterSpacing: 10,
 );
 
-class SubCategModel extends StatelessWidget {
+class SubcategModel extends StatelessWidget {
   final String mainCategName;
   final String subCategName;
   final String assetName;
-  final String subCategLabel;
-
-  const SubCategModel({
+  final String subcategLabel;
+  const SubcategModel({
+    super.key,
     required this.mainCategName,
     required this.subCategName,
+    required this.subcategLabel,
     required this.assetName,
-    required this.subCategLabel,
-    super.key,
   });
 
   @override
@@ -75,8 +77,8 @@ class SubCategModel extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => SubCategProducts(
-              subCategName: subCategName,
-              mainCategName: mainCategName,
+              subcategName: subCategName,
+              maincategName: mainCategName,
             ),
           ),
         );
@@ -87,16 +89,13 @@ class SubCategModel extends StatelessWidget {
             height: 70,
             width: 70,
             child: Image(
-              image: AssetImage(
-                assetName,
-              ),
+              image: AssetImage(assetName),
             ),
           ),
-          Expanded(
-            child: Text(
-              subCategLabel,
-            ),
-          ),
+          Text(
+            subcategLabel,
+            style: const TextStyle(fontSize: 11),
+          )
         ],
       ),
     );
@@ -113,7 +112,7 @@ class CategHeaderLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(30.0),
       child: Text(
         headerLabel,
         style: const TextStyle(

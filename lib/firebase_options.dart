@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB3rK3cy-inJSDASFqp9lNJm0qrql3Z11E',
-    appId: '1:37699514273:web:7e8be1858e8a50b49aa5e0',
-    messagingSenderId: '37699514273',
-    projectId: 'multi-store-ea764',
-    authDomain: 'multi-store-ea764.firebaseapp.com',
-    storageBucket: 'multi-store-ea764.appspot.com',
-    measurementId: 'G-ELLRVX3JGJ',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBHs_DPN9PHw2C1gKr93PoYXDX1GBd3I3o',
-    appId: '1:37699514273:android:8db691a3d0230c069aa5e0',
+    appId: '1:37699514273:android:7a6fe787290848fd9aa5e0',
     messagingSenderId: '37699514273',
     projectId: 'multi-store-ea764',
     storageBucket: 'multi-store-ea764.appspot.com',
@@ -66,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDQMK_xMuq35qD_MP4EmKaqFV98BBqz0oc',
-    appId: '1:37699514273:ios:1388eb0196e839889aa5e0',
+    appId: '1:37699514273:ios:be11c4fcdc2417039aa5e0',
     messagingSenderId: '37699514273',
     projectId: 'multi-store-ea764',
     storageBucket: 'multi-store-ea764.appspot.com',
     androidClientId: '37699514273-pg1jg0rqklbmpm2ie1cqa3faujfb5vli.apps.googleusercontent.com',
-    iosClientId: '37699514273-s3aerghd9muj7eg6itf88oakaimv8v9r.apps.googleusercontent.com',
-    iosBundleId: 'com.erkanozturk.multiStoreApp',
+    iosClientId: '37699514273-o9i4qqck5m0dc51qbburpf7uut9eo22c.apps.googleusercontent.com',
+    iosBundleId: 'com.erkanozturk1903.multiStoreApp',
   );
 }

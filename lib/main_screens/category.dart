@@ -3,23 +3,41 @@ import 'package:multi_store_app/categories/accessories_categ.dart';
 import 'package:multi_store_app/categories/bags_categ.dart';
 import 'package:multi_store_app/categories/beauty_categ.dart';
 import 'package:multi_store_app/categories/electronics_categ.dart';
-import 'package:multi_store_app/categories/homegarden.dart';
-import 'package:multi_store_app/categories/kids-categ.dart';
+import 'package:multi_store_app/categories/homegarden_categ.dart';
+import 'package:multi_store_app/categories/kids_categ.dart';
 import 'package:multi_store_app/categories/men_categ.dart';
 import 'package:multi_store_app/categories/shoes_categ.dart';
 import 'package:multi_store_app/categories/women_categ.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
 
 List<ItemsData> items = [
-  ItemsData(label: 'Erkek'),
-  ItemsData(label: 'Kadın'),
-  ItemsData(label: 'Elektronik'),
-  ItemsData(label: 'Aksesuar'),
-  ItemsData(label: 'Ayakkabı'),
-  ItemsData(label: 'Ev&Bahçe'),
-  ItemsData(label: 'Makyaj'),
-  ItemsData(label: 'Çocuk'),
-  ItemsData(label: 'Çanta'),
+  ItemsData(
+    label: 'Erkek',
+  ),
+  ItemsData(
+    label: 'Kadın',
+  ),
+  ItemsData(
+    label: 'Ayakkabı',
+  ),
+  ItemsData(
+    label: 'Çanta',
+  ),
+  ItemsData(
+    label: 'Elektronik',
+  ),
+  ItemsData(
+    label: 'Aksesuar',
+  ),
+  ItemsData(
+    label: 'Ev&Bahçe',
+  ),
+  ItemsData(
+    label: 'Çocuk',
+  ),
+  ItemsData(
+    label: 'Makyaj',
+  ),
 ];
 
 class CategoryScreen extends StatefulWidget {
@@ -34,13 +52,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   void initState() {
-    super.initState();
     for (var element in items) {
       element.isSelected = false;
     }
     setState(() {
       items[0].isSelected = true;
     });
+    super.initState();
   }
 
   @override
@@ -78,13 +96,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              _pageController.animateToPage(
-                index,
-                duration: const Duration(
-                  milliseconds: 100,
-                ),
-                curve: Curves.bounceInOut,
-              );
+              _pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.bounceInOut);
             },
             child: Container(
               color: items[index].isSelected == true
@@ -120,13 +134,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         children: const [
           MenCategory(),
           WomenCategory(),
+          ShoesCategory(),
+          BagsCategory(),
           ElectronicsCategory(),
           AccessoriesCategory(),
-          ShoesCategory(),
           HomeGardenCategory(),
-          BeautyCategory(),
           KidsCategory(),
-          BagsCategory(),
+          BeautyCategory(),
         ],
       ),
     );

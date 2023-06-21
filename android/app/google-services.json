@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37699514273:android:7a6fe787290848fd9aa5e0",
+        "android_client_info": {
+          "package_name": "com.erkanozturk1903.multi_store_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37699514273-hq0a9cgdhndil4g5etm3irkkgbivqco8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHs_DPN9PHw2C1gKr93PoYXDX1GBd3I3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37699514273-hq0a9cgdhndil4g5etm3irkkgbivqco8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "37699514273-o9i4qqck5m0dc51qbburpf7uut9eo22c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.erkanozturk1903.multiStoreApp"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/categ_widgets.dart';
 
-class WomenCategory extends StatelessWidget {
-  const WomenCategory({super.key});
+class HomeGardenCategory extends StatelessWidget {
+  const HomeGardenCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class WomenCategory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CategHeaderLabel(
-                  headerLabel: 'Kadın',
+                  headerLabel: 'Ev&Bahçe',
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.68,
@@ -28,12 +28,12 @@ class WomenCategory extends StatelessWidget {
                     mainAxisSpacing: 70,
                     crossAxisSpacing: 15,
                     crossAxisCount: 3,
-                    children: List.generate(women.length, (index) {
+                    children: List.generate(homeandgarden.length, (index) {
                       return SubcategModel(
-                        mainCategName: 'kadin',
-                        subCategName: women[index],
-                        assetName: 'images/women/women$index.jpg',
-                        subcategLabel: women[index],
+                        mainCategName: 'ev&bahce',
+                        subCategName: homeandgarden[index],
+                        assetName: 'images/homegarden/home$index.jpg',
+                        subcategLabel: homeandgarden[index],
                       );
                     }),
                   ),
@@ -46,7 +46,7 @@ class WomenCategory extends StatelessWidget {
           bottom: 0,
           right: 0,
           child: SliderBar(
-            maincategName: 'kadin',
+            maincategName: 'ev&bahce',
           ),
         ),
       ]),

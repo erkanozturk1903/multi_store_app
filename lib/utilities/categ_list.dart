@@ -12,7 +12,7 @@ List<String> maincateg = [
 ];
 
 List<String> men = [
-  'subcategory',
+  //'subcategory',
   'Gömlek',
   'Tişört',
   'Ceket',
@@ -24,7 +24,7 @@ List<String> men = [
   'Diğer',
 ];
 List<String> women = [
-  'subcategory',
+  //'subcategory',
   'Elbise',
   'Alt-üstTakım',
   'Tişört',
@@ -37,7 +37,7 @@ List<String> women = [
   'Diğer'
 ];
 List<String> electronics = [
-  'subcategory',
+  //'subcategory',
   'Telefon',
   'Bilgisayar',
   'Laptop',
@@ -55,7 +55,7 @@ List<String> electronics = [
 ];
 
 List<String> shoes = [
-  'subcategory',
+  //'subcategory',
   'Erkek Terlik',
   'Erkek Klasik',
   'Erkek Günlük',
@@ -73,7 +73,7 @@ List<String> shoes = [
 ];
 
 List<String> homeandgarden = [
-  'subcategory',
+  //'subcategory',
   'Salon',
   'Yatak Odası',
   'Yemek Odası',
@@ -87,7 +87,7 @@ List<String> homeandgarden = [
 ];
 
 List<String> beauty = [
-  'subcategory',
+  //'subcategory',
   'Vücut Bakımı',
   'Saç Bakımı',
   'Erkek Parfüm',
@@ -97,7 +97,7 @@ List<String> beauty = [
 ];
 
 List<String> accessories = [
-  'subcategory',
+  //'subcategory',
   'Şapka',
   'Erkek Gözlük',
   'Kadın Gözlük',
@@ -112,7 +112,7 @@ List<String> accessories = [
 ];
 
 List<String> kids = [
-  'subcategory',
+  //'subcategory',
   'Kız Takımları',
   'Kız Elbise',
   'Kız Üst',
@@ -129,7 +129,7 @@ List<String> kids = [
 ];
 
 List<String> bags = [
-  'subcategory',
+  //'subcategory',
   'Cüzdan',
   'El Çanta',
   'Bel Çanta',

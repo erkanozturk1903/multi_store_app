@@ -29,10 +29,10 @@ class FakeSearch extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: Icon(
                     Icons.search,
                     color: Colors.grey,
@@ -41,7 +41,7 @@ class FakeSearch extends StatelessWidget {
                 Text(
                   'Ne Arıyorsun?',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.grey,
                   ),
                 ),
